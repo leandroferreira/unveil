@@ -31,7 +31,7 @@
     function unveil() {
       var inview = images.filter(function() {
         var $e = $(this);
-        if ($e.is(":hidden")) return;
+        if ($e.hasClass(".hidden") || $e.closest(".hidden").length || $e.is(":hidden")) return;
 
         var wt = $w.scrollTop(),
             wb = wt + $w.height(),
@@ -44,8 +44,6 @@
       loaded = inview.trigger("unveil");
       images = images.not(loaded);
     }
-
-    $w.on("scroll.unveil resize.unveil lookup.unveil", unveil);
 
     unveil();
 
